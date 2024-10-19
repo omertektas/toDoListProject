@@ -3,52 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Todo List</title>
     <style>
-        .width{
-            width: 80%;
-            height: 2rem;
-            margin: 1rem;
-        }
+       
         .container{
-            border: 1px solid rgb(105, 101, 101) ;
+            border: 2px double black;
+            border-radius: 4px;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
-        }
-        .header{
             
         }
-        
-        .btnarea button{
-            background: red;
+        .button{
+            width: 10rem;
             color: white;
             border: none;
-            border-radius: 6px;
+            border-radius: 4px;
             height: 2rem;
-            
+        }
+        .basic-features{
+            height: 2rem;
+            width: 80%;
+            margin: 1rem;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h3 class="header width">Todo List</h3>
-        <input type="text" class="text width" placeholder="Bir Todo Girin">
-        <div class="btnarea width">
-            <button class="add-btn">Todo Ekleyin</button>
-        </div>
-        <h2 class="width">Todolar</h2>
-        <input type="text" class="filter width" placeholder="Bir Todo Arayın">
-        <div class="btnarea width">
-            <button style="background: rgb(61, 61, 61);">Tüm Taskları Temizleyin</button>
-        </div>
-
-        <ul class="todolist">
-            
+        <h3 class="basic-features">Todo List</h3>
+        <input type="text" placeholder="Bir Todo Girin" class="todo-input basic-features">
+        <button style="background: red;" class="add-todo button basic-features">Todo Ekleyin</button>
+        <h4 class="basic-features">Todolar</h4>
+        <input type="text"placeholder="Bir Todo Arayın" class="todo-filter basic-features">
+        <ul class="todo-list basic-features ">
+            <li>selam</li>
         </ul>
-
-    </div>
+        <button style="background:grey;" class="clear-todo button basic-features">Tüm Taskları Temizleyin</button>
+    </div>   
 
     <script src="todo.js"></script>
 </body>
