@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .width{
+            width: 80%;
+            height: 2rem;
+            margin: 1rem;
+        }
+        .container{
+            border: 1px solid rgb(105, 101, 101) ;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .header{
+            
+        }
+        
+        .btnarea button{
+            background: red;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            height: 2rem;
+            
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h3 class="header width">Todo List</h3>
+        <input type="text" class="text width" placeholder="Bir Todo Girin">
+        <div class="btnarea width">
+            <button class="add-btn">Todo Ekleyin</button>
+        </div>
+        <h2 class="width">Todolar</h2>
+        <input type="text" class="filter width" placeholder="Bir Todo Arayın">
+        <div class="btnarea width">
+            <button style="background: rgb(61, 61, 61);">Tüm Taskları Temizleyin</button>
+        </div>
+
+        <ul class="todolist">
+            
+        </ul>
+
+    </div>
+
+    <script src="todo.js"></script>
+</body>
+</html>
