@@ -15,7 +15,7 @@
             flex-direction: column;
             align-items: center;
             height: auto;
-            
+            overflow: hidden;
         }
         .button{
             width: 10rem;
@@ -33,8 +33,13 @@
             list-style-type: auto;
             font-size: large;
             font-weight: 600;
-
+            
         }
+        .todo-list li{
+            margin: 1rem;
+        }
+        
+        
     </style>
 </head>
 <body>
@@ -46,11 +51,9 @@
         <h4 class="basic-features">Todolar</h4>
         <input type="text"placeholder="Bir Todo Arayın" class="todo-filter basic-features">
         <ul class="todo-list">
-            
+           
         </ul>
         <button style="background:grey;" class="clear-todo button basic-features">Tüm Taskları Temizleyin</button>
-
-        <button class="delete-sentence"></button>
     </div>   
 
     <script src="todo.js"></script>

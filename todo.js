@@ -1,53 +1,65 @@
-const container = document.querySelector('.container');
-const input = document.querySelector('.todo-input');
-const addBtn = document.querySelector('.add-todo');
-const todoList = document.querySelector('.todo-list');
-const deleteSentenceBtn = document.querySelector('.delete-sentence');
-let isDeleteBtn = false;
+const container = document.querySelector(".container");
+const input = document.querySelector(".todo-input");
+const addBtn = document.querySelector(".add-todo");
+const todoFilter = document.querySelector("todo-filter")
+const todoList = document.querySelector(".todo-list");
 
 
-function events(){
-    
-    addBtn.addEventListener("click",addToList);
-    if(isDeleteBtn){ //burdaki eksikleri hallet
-        deleteSentenceBtn.addEventListener("click",deleteToList);
-    }
-    
-
+function events() {
+  addBtn.addEventListener("click", addToList);
+  todoFilter.addEventListener("change",filter);
 }
 
-function addToList(){
+function addToList() {
+  const inputValue = input.value;
 
-    const inputValue = input.value;
+  if (inputValue === "") {
+    if (!document.querySelector(".alert")) {
+      let html = `
+        <div class="alert alert-danger" role="alert">
+            Listeye boş bir şey eklenemez!
+        </div>
+      `;
 
-if (inputValue === "") {
-   
-    if (!document.querySelector('.alert')) {
-        let html = `
-            <div class="alert alert-danger" role="alert">
-                Listeye boş bir şey eklenemez!
-            </div>
-        `;
-        
-        const tempDiv = document.createElement('div');
-        tempDiv.innerHTML = html;
-        addBtn.after(tempDiv.firstElementChild); 
+      const tempDiv = document.createElement("div");
+      tempDiv.innerHTML = html;
+      addBtn.after(tempDiv.firstElementChild);
     }
-} else {
-    
-    todoList.innerHTML += `<li>${inputValue}<button class="delete-sentence">sil</button></li>`;
+  } else {
+    todoList.innerHTML += `
+      <li class = "sentence">${inputValue}<button class="delete-sentence">sil</button></li>
+      
+    `;
     input.value = "";
-    isDeleteBtn = true;
-    const alertDiv = document.querySelector('.alert');
+
+    const alertDiv = document.querySelector(".alert");
     if (alertDiv) {
-        alertDiv.remove(); 
+      alertDiv.remove();
     }
+
+    
+    const deleteSentenceBtns = document.querySelectorAll('.delete-sentence');
+    deleteSentenceBtns.forEach((btn) => {
+      btn.addEventListener("click", deleteToList);
+    });
+  }
 }
 
+function deleteToList(event) {
+  const li = event.target.parentElement;
+  li.remove();
+  
 }
 
-function deleteToList(){
-    console.log("merhaba");
+
+
+function filter(){
+    /*const sentences = document.querySelectorAll('.sentence');
+    sentences.forEach((stc) => {
+        console.log(stc.value);
+    })*/
+   console.log("ok");
 }
 
 events();
+
