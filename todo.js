@@ -1,13 +1,12 @@
 const container = document.querySelector(".container");
 const input = document.querySelector(".todo-input");
 const addBtn = document.querySelector(".add-todo");
-const todoFilter = document.querySelector("todo-filter")
+const todoFilter = document.querySelector(".todo-filter");
 const todoList = document.querySelector(".todo-list");
-
 
 function events() {
   addBtn.addEventListener("click", addToList);
-  todoFilter.addEventListener("change",filter);
+  todoFilter.addEventListener("input", filterStc); // Checks all letters
 }
 
 function addToList() {
@@ -28,7 +27,6 @@ function addToList() {
   } else {
     todoList.innerHTML += `
       <li class = "sentence">${inputValue}<button class="delete-sentence">sil</button></li>
-      
     `;
     input.value = "";
 
@@ -37,8 +35,7 @@ function addToList() {
       alertDiv.remove();
     }
 
-    
-    const deleteSentenceBtns = document.querySelectorAll('.delete-sentence');
+    const deleteSentenceBtns = document.querySelectorAll(".delete-sentence");
     deleteSentenceBtns.forEach((btn) => {
       btn.addEventListener("click", deleteToList);
     });
@@ -48,18 +45,20 @@ function addToList() {
 function deleteToList(event) {
   const li = event.target.parentElement;
   li.remove();
-  
 }
 
+function filterStc() {
+  const filterValue = todoFilter.value.toLowerCase();
+  const sentences = document.querySelectorAll(".sentence");
 
-
-function filter(){
-    /*const sentences = document.querySelectorAll('.sentence');
-    sentences.forEach((stc) => {
-        console.log(stc.value);
-    })*/
-   console.log("ok");
+  sentences.forEach((stc) => {
+    const text = stc.textContent.toLowerCase();
+    if (text.includes(filterValue)) {
+      stc.style.display = "list-item"; // show
+    } else {
+      stc.style.display = "none"; 
+    }
+  });
 }
 
 events();
-
