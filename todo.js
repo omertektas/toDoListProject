@@ -3,10 +3,12 @@ const input = document.querySelector(".todo-input");
 const addBtn = document.querySelector(".add-todo");
 const todoFilter = document.querySelector(".todo-filter");
 const todoList = document.querySelector(".todo-list");
+const deleteAllTodo = document.querySelector(".clear-todo");
 
 function events() {
   addBtn.addEventListener("click", addToList);
   todoFilter.addEventListener("input", filterStc);
+  deleteAllTodo.addEventListener("click", deleteAll);
   document.addEventListener("DOMContentLoaded", loadAllTodosToUI);
 }
 
@@ -14,7 +16,6 @@ function loadAllTodosToUI() {
   let todos = getTodosFromStorage();
 
   todos.forEach((todo) => {
-    console.log(todo);
     addTodoToUI(todo);
   });
 }
@@ -102,6 +103,13 @@ function deleteTodoToStorage(deleteTodo) {
   });
 
   localStorage.setItem("todos", JSON.stringify(todos));
+}
+
+function deleteAll(){
+  let todos = getTodosFromStorage();
+  todos = [];
+  localStorage.setItem("todos", JSON.stringify(todos));
+ //hepsinisil
 }
 
 events();
