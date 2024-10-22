@@ -25,8 +25,10 @@ function addToList() {
       addBtn.after(tempDiv.firstElementChild);
     }
   } else {
+
+    addTodoToStorage(inputValue);
     todoList.innerHTML += `
-      <li class = "sentence">${inputValue}<button class="delete-sentence">sil</button></li>
+      <li class = "sentence">${inputValue}<button class="delete-sentence"></button></li>
     `;
     input.value = "";
 
@@ -44,6 +46,8 @@ function addToList() {
 
 function deleteToList(event) {
   const li = event.target.parentElement;
+  const todoText = li.textContent.trim();
+  deleteTodoToStorage(todoText);
   li.remove();
 }
 
@@ -60,5 +64,34 @@ function filterStc() {
     }
   });
 }
+
+function getTodosFromStorage(){ 
+  let todos ;
+  if(localStorage.getItem("todos") === null){
+    todos = [];
+  }
+  else{
+    todos = JSON.parse(localStorage.getItem("todos"));
+  }
+
+  return todos;
+
+}
+
+function addTodoToStorage(newTodo){
+  let todos = getTodosFromStorage();
+  todos.push(newTodo);
+  localStorage.setItem("todos",JSON.stringify(todos));
+}
+
+function deleteTodoToStorage(deleteTodo) {
+  let todos = getTodosFromStorage();
+  todos = todos.filter((todo) => {
+    return !todo.includes(deleteTodo.trim());
+  });
+  
+  localStorage.setItem("todos", JSON.stringify(todos));
+}
+
 
 events();
