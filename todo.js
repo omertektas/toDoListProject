@@ -6,7 +6,17 @@ const todoList = document.querySelector(".todo-list");
 
 function events() {
   addBtn.addEventListener("click", addToList);
-  todoFilter.addEventListener("input", filterStc); // Checks all letters
+  todoFilter.addEventListener("input", filterStc);
+  document.addEventListener("DOMContentLoaded", loadAllTodosToUI);
+}
+
+function loadAllTodosToUI() {
+  let todos = getTodosFromStorage();
+
+  todos.forEach((todo) => {
+    console.log(todo);
+    addTodoToUI(todo);
+  });
 }
 
 function addToList() {
@@ -25,23 +35,26 @@ function addToList() {
       addBtn.after(tempDiv.firstElementChild);
     }
   } else {
-
     addTodoToStorage(inputValue);
-    todoList.innerHTML += `
-      <li class = "sentence">${inputValue}<button class="delete-sentence"></button></li>
-    `;
-    input.value = "";
-
-    const alertDiv = document.querySelector(".alert");
-    if (alertDiv) {
-      alertDiv.remove();
-    }
-
-    const deleteSentenceBtns = document.querySelectorAll(".delete-sentence");
-    deleteSentenceBtns.forEach((btn) => {
-      btn.addEventListener("click", deleteToList);
-    });
+    addTodoToUI(inputValue);
   }
+}
+
+function addTodoToUI(inputValue) {
+  todoList.innerHTML += `
+      <li class = "sentence">${inputValue}<button class="delete-sentence" ></button></li>
+    `;
+  input.value = "";
+
+  const alertDiv = document.querySelector(".alert");
+  if (alertDiv) {
+    alertDiv.remove();
+  }
+
+  const deleteSentenceBtns = document.querySelectorAll(".delete-sentence");
+  deleteSentenceBtns.forEach((btn) => {
+    btn.addEventListener("click", deleteToList);
+  });
 }
 
 function deleteToList(event) {
@@ -60,28 +73,26 @@ function filterStc() {
     if (text.includes(filterValue)) {
       stc.style.display = "list-item"; // show
     } else {
-      stc.style.display = "none"; 
+      stc.style.display = "none";
     }
   });
 }
 
-function getTodosFromStorage(){ 
-  let todos ;
-  if(localStorage.getItem("todos") === null){
+function getTodosFromStorage() {
+  let todos;
+  if (localStorage.getItem("todos") === null) {
     todos = [];
-  }
-  else{
+  } else {
     todos = JSON.parse(localStorage.getItem("todos"));
   }
 
   return todos;
-
 }
 
-function addTodoToStorage(newTodo){
+function addTodoToStorage(newTodo) {
   let todos = getTodosFromStorage();
   todos.push(newTodo);
-  localStorage.setItem("todos",JSON.stringify(todos));
+  localStorage.setItem("todos", JSON.stringify(todos));
 }
 
 function deleteTodoToStorage(deleteTodo) {
@@ -89,9 +100,8 @@ function deleteTodoToStorage(deleteTodo) {
   todos = todos.filter((todo) => {
     return !todo.includes(deleteTodo.trim());
   });
-  
+
   localStorage.setItem("todos", JSON.stringify(todos));
 }
-
 
 events();
