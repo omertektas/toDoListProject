@@ -106,10 +106,12 @@ function deleteTodoToStorage(deleteTodo) {
 }
 
 function deleteAll(){
-  let todos = getTodosFromStorage();
-  todos = [];
-  localStorage.setItem("todos", JSON.stringify(todos));
- //hepsinisil
+  if(confirm("Tümünü silmek istediğinize emin misiniz?")){
+      localStorage.removeItem("todos");
+      todoList.innerHTML = "";
+  }
+  
+ 
 }
 
 events();
